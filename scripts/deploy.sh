@@ -9,6 +9,7 @@ cd "$(dirname "$0")/.."
 if ! mountpoint -q "$DEST"; then
     echo "error: $DEST is not mounted. Mount it first with:" >&2
     echo "  mount -o uid=$(id -u) -t davfs https://neocities.org/webdav $DEST" >&2
+    echo "When prompted, enter the Neocities site name as the username and a site API key as the password." >&2
     exit 1
 fi
 
