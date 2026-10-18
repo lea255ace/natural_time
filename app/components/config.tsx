@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ConfigParameters, useConfigContext } from 'context/configProvider';
-import { Box, HStack, VStack, Input, FormLabel, FormControl, Button, Text } from '@chakra-ui/react';
+import { Box, HStack, VStack, Input, Field, Button, Text } from '@chakra-ui/react';
 
 type DisplayedParameters = {
     latitude: string;
@@ -36,23 +36,23 @@ export default function Config() {
         <Box>
             <form onSubmit={updateConfigValues}>
                 <VStack width='fit-content' align='center'>
-                    <FormControl>
-                        <HStack>
-                            <FormLabel maxWidth='80px' textAlign='center'>Latitude
-                                <Input name='latitude' textAlign='center'
-                                    value={displayedValues.latitude}
-                                    onChange={e => setDisplayedValues({...displayedValues, latitude: e.target.value})}
-                                />
-                            </FormLabel>
-                            <FormLabel maxWidth='80px' textAlign='center' mx='0'>Longitude
-                                <Input name='longitude' textAlign='center'
-                                    value={displayedValues.longitude}
-                                    onChange={e => setDisplayedValues({...displayedValues, longitude: e.target.value})}
-                                />
-                            </FormLabel>
-                        </HStack>
-                    </FormControl>
-                    <Button type='submit' size='sm'>Update</Button>
+                    <HStack>
+                        <Field.Root maxWidth='80px' alignItems='center'>
+                            <Field.Label textStyle='md'>Latitude</Field.Label>
+                            <Input textStyle='md' name='latitude' textAlign='center'
+                                value={displayedValues.latitude}
+                                onChange={e => setDisplayedValues({...displayedValues, latitude: e.target.value})}
+                            />
+                        </Field.Root>
+                        <Field.Root maxWidth='80px' alignItems='center'>
+                            <Field.Label textStyle='md'>Longitude</Field.Label>
+                            <Input textStyle='md' name='longitude' textAlign='center'
+                                value={displayedValues.longitude}
+                                onChange={e => setDisplayedValues({...displayedValues, longitude: e.target.value})}
+                            />
+                        </Field.Root>
+                    </HStack>
+                    <Button type='submit' size='sm' variant='subtle'>Update</Button>
                 </VStack>
             </form>
             <br/>

@@ -6,9 +6,6 @@ import {
     Flex,
     Heading,
     Slider,
-    SliderFilledTrack,
-    SliderThumb,
-    SliderTrack,
     Text,
     VStack,
     Wrap,
@@ -31,10 +28,10 @@ function ComplicationDisplay() {
                 return (
                     <WrapItem key={index}>
                         <VStack>
-                            <Center height='200px' width='fit-content' border='1px' borderColor='gray.400' borderRadius='5px'>
+                            <Center height='200px' width='fit-content' borderWidth='1px' borderColor='gray.400' borderRadius='5px'>
                                 < Complication.Display />
                             </Center>
-                            <Text size='md' fontWeight='bold'>
+                            <Text fontWeight='bold'>
                                 {Complication.Title}
                             </Text>
                         </VStack>
@@ -59,31 +56,39 @@ export default function SolarClock() {
     return (
         <AstrolabeProvider date={date}>
             <Box width='100%' px='5%' marginTop='2em'>
-                <Slider
+                <Slider.Root
+                    colorPalette='blue'
+                    size='sm'
                     id="currentDay"
-                    defaultValue={50}
+                    defaultValue={[50]}
                     min={0}
                     max={364}
-                    onChange={(v) => setCurrentDay(v)}
+                    onValueChange={(details) => setCurrentDay(details.value[0])}
                 >
-                    <SliderTrack>
-                        <SliderFilledTrack />
-                    </SliderTrack>
-                    <SliderThumb />
-                </Slider>
+                    <Slider.Control>
+                        <Slider.Track>
+                            <Slider.Range />
+                        </Slider.Track>
+                        <Slider.Thumbs />
+                    </Slider.Control>
+                </Slider.Root>
                 <Text fontWeight='bold' marginBottom='1.5em'>Day of Year</Text>
-                <Slider
+                <Slider.Root
+                    colorPalette='blue'
+                    size='sm'
                     id="currentTime"
-                    defaultValue={720}
+                    defaultValue={[720]}
                     min={0}
                     max={1440 - 1}
-                    onChange={(v) => setCurrentTimeMinutes(v)}
+                    onValueChange={(details) => setCurrentTimeMinutes(details.value[0])}
                 >
-                    <SliderTrack>
-                        <SliderFilledTrack />
-                    </SliderTrack>
-                    <SliderThumb />
-                </Slider>
+                    <Slider.Control>
+                        <Slider.Track>
+                            <Slider.Range />
+                        </Slider.Track>
+                        <Slider.Thumbs />
+                    </Slider.Control>
+                </Slider.Root>
                 <Text fontWeight='bold'>Time of Day</Text>
             </Box>
             <Flex gap='2'>
@@ -91,7 +96,7 @@ export default function SolarClock() {
                     <Clock />
                 </Box>
                 <VStack align='start' flex='1'>
-                    <Heading as='h2' size='lg'>Complications</Heading>
+                    <Heading as='h2' size={{ base: '2xl', md: '3xl' }}>Complications</Heading>
                     <ComplicationDisplay />
                 </VStack>
             </Flex>

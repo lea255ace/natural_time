@@ -1,6 +1,6 @@
 import Annotation from 'components/annotation.tsx'
 import { Text, Box, Image } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import Link from 'components/link';
 
 # Natural Time
 Natural time is an ongoing attempt to re-frame the way I think about time, and to better connect the passage of time
@@ -98,8 +98,8 @@ describing this difference with respect to the day of the year.
     <Image src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Equation_of_time.svg/1280px-Equation_of_time.svg.png'
         alt='Graph of the Equation of Time'
     />
-    <Text align='center' marginTop='-2'>Graph of the Equation of Time</Text>
-    <Text align='center' size='sm' color='gray.400'>Source: <Link
+    <Text textAlign='center' marginTop='-2'>Graph of the Equation of Time</Text>
+    <Text textAlign='center' color='gray.400'>Source: <Link
         href='https://en.wikipedia.org/wiki/Equation_of_time#/media/File:Equation_of_time.svg'
         color='gray.400'>Wikipedia</Link></Text>
 </Box>

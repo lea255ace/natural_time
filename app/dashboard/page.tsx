@@ -21,7 +21,7 @@ export default function Home() {
 
     return (
         <AstrolabeProvider date={currentDate}>
-            <Stack direction={['column', null, null, 'row']} align='center' justifyContent='center' spacing='8'
+            <Stack direction={['column', null, null, 'row']} align='center' justifyContent='center' gap='8'
                 fontSize={['xs', 'md']}
                 marginRight={['0px', null, null, '100px', '200px']}>
                 <Clock />

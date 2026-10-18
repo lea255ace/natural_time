@@ -30,8 +30,8 @@ export default function Clock() {
     return (
         <Box width='100%' maxWidth='800px'>
             <SolarClock civilTimeOffsetAngleDeg={civilTimeOffsetAngleDeg} solsticeSunriseHourAngleDeg={solsticeSunriseHourAngleDeg} sunriseHourAngleDeg={sunriseHourAngleDeg} solarHourAngleDeg={civilTimeHourAngleDeg} stageHandAngleDeg={stageHandAngleDeg}/>
-            <Text align='center' fontSize='1.5em' marginTop='-9%'><Highlight query={moment.momentName()} styles={{ fontWeight: 'bold' }}>{'The current moment is ' + moment.momentName()}</Highlight></Text>
-            <Text align='center' fontSize='1.125em' marginTop='2'>The current civil time is: {String(Math.floor(civilTimeMinutes/60)).padStart(2, '0')}:{String(civilTimeMinutes%60).padStart(2, '0')}</Text>
+            <Text textAlign='center' fontSize='1.5em' marginTop='-9%'><Highlight query={moment.momentName()} styles={{ fontWeight: 'bold' }}>{'The current moment is ' + moment.momentName()}</Highlight></Text>
+            <Text textAlign='center' fontSize='1.125em' marginTop='2'>The current civil time is: {String(Math.floor(civilTimeMinutes/60)).padStart(2, '0')}:{String(civilTimeMinutes%60).padStart(2, '0')}</Text>
         </Box>
     );
 }

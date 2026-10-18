@@ -14,16 +14,13 @@
     "clean": "rm -r .next/ out/ || exit 0"
   },
   "dependencies": {
-    "@chakra-ui/next-js": "^2.4.2",
-    "@chakra-ui/react": "^2.10.10",
+    "@chakra-ui/react": "^3.37.0",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
     "@lea255ace/astro_algo": "0.1.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.4.2",
     "chart.js": "^4.5.1",
-    "framer-motion": "^11.18.2",
     "next": "^16.4.2",
     "react": "19.3.1",
     "react-chartjs-2": "^5.3.1",

@@ -1,14 +1,6 @@
 # Roadmap
 
-Planned work and known bugs, in priority order. Finish the upgrade steps before starting on bugs or other issues.
-When an item is finished, remove it in the same commit.
-
-## Upgrade (in order)
-
-1. Migrate Chakra 2 to 3 on its own branch. This touches the theme in `chakraProvider.tsx` (recipes and
-   `createSystem`), `Popover`, `Slider` and `RangeSlider`, `Switch`, `FormControl`, `List`, and `Breadcrumb`, and
-   removes `@chakra-ui/next-js` and `framer-motion`. Visually check the annotation popover placement and the
-   overlaid sliders in the DST complication afterward.
+Known bugs and planned work, in priority order. When an item is finished, remove it in the same commit.
 
 ## Known bugs (by priority)
 
@@ -33,7 +25,6 @@ When an item is finished, remove it in the same commit.
 - Leap years are ignored; the day sliders and ranges are hardcoded to 0–364.
 - The solstice lines in `SolarClock` are drawn symmetrically, which is wrong (see the `TODO` there).
 - `about.mdx` has the typo "becuase" and says "0° latitude (the prime meridian)" where it means longitude.
-- Annotation popovers show a focus ring after a fresh page load, because Chakra focuses the popover content.
 
 ## Maintenance
 
