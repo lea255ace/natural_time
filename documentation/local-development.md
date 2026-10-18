@@ -39,6 +39,16 @@ npm run serve
 `npm run build` writes the static export to `out/`, and `npm run serve` serves that folder with `serve`, usually at
 <http://localhost:3000>.
 
+## Checking changes
+
+The project has no CI, so run the checks locally before committing:
+
+```sh
+npm run check
+```
+
+This runs ESLint, then a production build, which also type-checks the code.
+
 To remove the `.next/` and `out/` folders from a previous build, run:
 
 ```sh

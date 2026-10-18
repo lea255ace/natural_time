@@ -13,7 +13,8 @@ work, and remove an item in the same commit that finishes it.
 -   Node 24 or later is required (`engines` in `package.json`). Check `node --version` first; older Node
     installs may still be on `PATH`.
 
--   `npm run dev`, `npm run build` (writes `out/`), `npm run serve`, `npm run lint`.
+-   `npm run dev`, `npm run build` (writes `out/`), `npm run serve`, `npm run lint`, and `npm run check` (lint,
+    then build). Run `npm run check` before committing.
 
 -   `npm run deploy` publishes to the live site. Never run it, or rsync to `~/neocities_webdav`, without asking.
 
@@ -53,7 +54,8 @@ work, and remove an item in the same commit that finishes it.
 
 -   Neocities rejects rsync's temp-file rename for `index.html`; the deploy script uses `--inplace` for this.
 
--   `.github/workflows/` targets GitHub Pages and Node 18 and is stale.
+-   There is intentionally no CI. Checks run locally with `npm run check`, and `npm run deploy` lints before it
+    builds.
 
 ## Conventions
 

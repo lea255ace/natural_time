@@ -6,6 +6,8 @@ DEST="${NEOCITIES_WEBDAV:-$HOME/neocities_webdav}"
 
 cd "$(dirname "$0")/.."
 
+npm run lint
+
 if ! mountpoint -q "$DEST"; then
     echo "error: $DEST is not mounted. Mount it first with:" >&2
     echo "  mount -o uid=$(id -u) -t davfs https://neocities.org/webdav $DEST" >&2

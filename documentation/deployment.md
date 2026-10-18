@@ -16,9 +16,9 @@ mount -o uid=1000 -t davfs https://neocities.org/webdav ~/neocities_webdav
 npm run deploy
 ```
 
-The deploy script cleans and rebuilds the static export, then syncs `out/` to the mount with `rsync`. It stops with an
-error if the mount is missing, if `rsync` fails to transfer any file, or if `index.html` on Neocities doesn't match the
-new build.
+The deploy script runs ESLint, cleans and rebuilds the static export, then syncs `out/` to the mount with `rsync`. It
+stops with an error if ESLint reports errors, if the mount is missing, if `rsync` fails to transfer any file, or if
+`index.html` on Neocities doesn't match the new build.
 
 The script syncs to `~/neocities_webdav` by default. To use a different mount point, set `NEOCITIES_WEBDAV`:
 

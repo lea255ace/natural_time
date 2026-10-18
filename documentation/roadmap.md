@@ -5,13 +5,10 @@ When an item is finished, remove it in the same commit.
 
 ## Upgrade (in order)
 
-1.  Replace the stale GitHub Pages workflows in `.github/workflows/` with a lint, type check, and build check on
-    Node 24.
-
-1.  Migrate Chakra 2 to 3 on its own branch. This touches the theme in `chakraProvider.tsx` (recipes and
-    `createSystem`), `Popover`, `Slider` and `RangeSlider`, `Switch`, `FormControl`, `List`, and `Breadcrumb`, and
-    removes `@chakra-ui/next-js` and `framer-motion`. Visually check the annotation popover placement and the
-    overlaid sliders in the DST complication afterward.
+1. Migrate Chakra 2 to 3 on its own branch. This touches the theme in `chakraProvider.tsx` (recipes and
+   `createSystem`), `Popover`, `Slider` and `RangeSlider`, `Switch`, `FormControl`, `List`, and `Breadcrumb`, and
+   removes `@chakra-ui/next-js` and `framer-motion`. Visually check the annotation popover placement and the
+   overlaid sliders in the DST complication afterward.
 
 ## Known bugs (by priority)
 
