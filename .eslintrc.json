@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["AGENTS.md"],
   "extends": [
     "eslint:recommended",
     "next/core-web-vitals",
