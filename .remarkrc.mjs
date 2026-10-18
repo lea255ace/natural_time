@@ -4,12 +4,13 @@ import remarkPresetLintMarkdownStyleGuide from 'remark-preset-lint-markdown-styl
 
 import remarkLintMaximumLineLength from 'remark-lint-maximum-line-length';
 
-export default {
+const remarkConfig = {
     plugins: [
         remarkPresetLintConsistent,
         remarkPresetLintRecommended,
         remarkPresetLintMarkdownStyleGuide,
         [remarkLintMaximumLineLength, [1, 120]]
-
     ]
-}
+};
+
+export default remarkConfig;

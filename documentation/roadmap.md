@@ -1,12 +1,9 @@
 # Roadmap
 
-Planned work and known bugs, in priority order. When an item is finished, remove it in the same commit.
+Planned work and known bugs, in priority order. Finish the upgrade steps before starting on bugs or other issues.
+When an item is finished, remove it in the same commit.
 
 ## Upgrade (in order)
-
-1.  Migrate ESLint 8 to 9 with a flat `eslint.config.mjs`. `eslint-config-next` 16 requires ESLint 9. This also means
-    moving to `typescript-eslint` 8 and `eslint-plugin-mdx` 3, replacing `--ignore-path` in the `lint` script, and
-    carrying `AGENTS.md` over into the new `ignores` list.
 
 1.  Replace the stale GitHub Pages workflows in `.github/workflows/` with a lint, type check, and build check on
     Node 24.
@@ -20,7 +17,9 @@ Planned work and known bugs, in priority order. When an item is finished, remove
 
 1.  Invalid latitude or longitude input breaks the site. `Config` saves `parseFloat` results without validation, so
     `NaN` is stored as `null`, and the next load throws in `translateConfigValues` until site data is cleared.
-    `ConfigProvider` also calls `JSON.parse` without a `try`/`catch`.
+    `ConfigProvider` also calls `JSON.parse` without a `try`/`catch`. While reworking this, fix the two
+    `react-hooks/set-state-in-effect` warnings in `ConfigProvider` and `Config` (for example, read saved settings
+    with `useSyncExternalStore`), then restore that rule to an error in `eslint.config.mjs`.
 
 1.  Polar latitudes produce `NaN`. `calculateSunriseHourAngleDegrees` in `astro_algo` doesn't clamp the `acos`
     argument, so polar day and night break the clock. `Moment` also needs to handle a zero-length day or night.
