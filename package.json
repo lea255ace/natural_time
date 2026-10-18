@@ -9,6 +9,7 @@
     "build": "next build",
     "build-debug": "BUILD_MODE=debug next build",
     "serve": "serve out",
+    "deploy": "scripts/deploy.sh",
     "clean": "rm -r .next/ out/ || exit 0"
   },
   "dependencies": {

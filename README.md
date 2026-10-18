@@ -8,3 +8,4 @@ A web-based version of this project is hosted [here](https://natural-time.bit-ba
 A more detailed writeup is hosted on the [About page](https://natural-time.bit-bar.org/about).
 
 For instructions on building and running the site locally, see [Local Development](documentation/local-development.md).
+For instructions on publishing the site, see [Deployment](documentation/deployment.md).
