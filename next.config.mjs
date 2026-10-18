@@ -1,5 +1,4 @@
 import nextMdx from '@next/mdx';
-import smartypants from 'remark-smartypants';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -14,11 +13,11 @@ const nextConfig = {
 const withMDX = nextMdx({
     options: {
         remarkPlugins: [
-            [smartypants, {
+            // Turbopack requires plugins to be referenced by name so the loader options are serializable.
+            ['remark-smartypants', {
                 ellipses: false
             }]
-        ],
-        target: 'serverless'
+        ]
     }
 });
 

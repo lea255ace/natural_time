@@ -1,5 +1,9 @@
 # Local Development
 
+## Prerequisites
+
+Building the site requires Node.js 24 (LTS) or later.
+
 ## Installing dependencies
 
 The `@lea255ace/astro_algo` package is hosted on GitHub Packages, so installing dependencies requires a GitHub token
