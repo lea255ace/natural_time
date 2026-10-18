@@ -3,6 +3,9 @@
 Static Next.js site (App Router, `output: 'export'`) that renders a solar clock. Hosted on Neocities.
 See `documentation/local-development.md` and `documentation/deployment.md` for setup details.
 
+Planned work and known bugs, in priority order, are in `documentation/roadmap.md`. Check it before starting new
+work, and remove an item in the same commit that finishes it.
+
 @AGENTS.md
 
 ## Commands
