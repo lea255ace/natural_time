@@ -6,3 +6,5 @@ from which it was originally derived.
 
 A web-based version of this project is hosted [here](https://natural-time.bit-bar.org/).
 A more detailed writeup is hosted on the [About page](https://natural-time.bit-bar.org/about).
+
+For instructions on building and running the site locally, see [Local Development](documentation/local-development.md).
