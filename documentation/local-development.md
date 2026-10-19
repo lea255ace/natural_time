@@ -47,7 +47,8 @@ The project has no CI, so run the checks locally before committing:
 npm run check
 ```
 
-This runs ESLint, then a production build, which also type-checks the code.
+This runs ESLint, the unit tests, and then a production build, which also type-checks the code. To run only the
+unit tests, use `npm test`.
 
 To remove the `.next/` and `out/` folders from a previous build, run:
 

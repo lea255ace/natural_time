@@ -13,13 +13,15 @@ work, and remove an item in the same commit that finishes it.
 -   Node 24 or later is required (`engines` in `package.json`). Check `node --version` first; older Node
     installs may still be on `PATH`.
 
--   `npm run dev`, `npm run build` (writes `out/`), `npm run serve`, `npm run lint`, and `npm run check` (lint,
-    then build). Run `npm run check` before committing.
+-   `npm run dev`, `npm run build` (writes `out/`), `npm run serve`, `npm run lint`, `npm test`, and
+    `npm run check` (lint, tests, then build). Run `npm run check` before committing.
 
 -   `npm run deploy` publishes to the live site. Never run it, or rsync to `~/neocities_webdav`, without asking.
 
--   There are no automated tests. To verify UI changes, drive the page in a browser and interact with it
-    (click popovers, submit the config form). Loading a page without errors doesn't prove it hydrated.
+-   Unit tests (Vitest) cover the pure logic in `app/types/` and live next to it as `*.test.ts`. They run in the
+    `America/New_York` timezone (set in `vitest.config.mts`). Take expected values from an outside reference, not
+    from running the code. There are no UI tests: to verify UI changes, drive the page in a browser and interact
+    with it (click popovers, submit the config form). Loading a page without errors doesn't prove it hydrated.
 
 ## Architecture
 

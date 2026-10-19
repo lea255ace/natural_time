@@ -5,7 +5,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "check": "npm run lint && npm run build",
+    "test": "vitest run",
+    "check": "npm run lint && npm test && npm run build",
     "dev": "next dev",
     "build": "next build",
     "build-debug": "BUILD_MODE=debug next build",
@@ -45,6 +46,7 @@
     "eslint-plugin-mdx": "^3.8.1",
     "serve": "^14.2.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.71.2"
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.5"
   }
 }
