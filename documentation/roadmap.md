@@ -4,12 +4,6 @@ Known bugs and planned work, in priority order. When an item is finished, remove
 
 ## Known bugs (by priority)
 
-1.  Invalid latitude or longitude input breaks the site. `Config` saves `parseFloat` results without validation, so
-    `NaN` is stored as `null`, and the next load throws in `translateConfigValues` until site data is cleared.
-    `ConfigProvider` also calls `JSON.parse` without a `try`/`catch`. While reworking this, fix the two
-    `react-hooks/set-state-in-effect` warnings in `ConfigProvider` and `Config` (for example, read saved settings
-    with `useSyncExternalStore`), then restore that rule to an error in `eslint.config.mjs`.
-
 1.  Polar latitudes produce `NaN`. `calculateSunriseHourAngleDegrees` in `astro_algo` doesn't clamp the `acos`
     argument, so polar day and night break the clock. `Moment` also needs to handle a zero-length day or night.
 

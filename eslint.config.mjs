@@ -14,8 +14,6 @@ export default defineConfig([
     {
         files: ['**/*.{js,jsx,mjs,ts,tsx}'],
         rules: {
-            // TODO: Restore to an error once the config state handling is reworked (see documentation/roadmap.md).
-            'react-hooks/set-state-in-effect': 'warn',
             'indent': ['warn', 4],
             'quotes': ['warn', 'single'],
             'linebreak-style': ['error', 'unix'],
