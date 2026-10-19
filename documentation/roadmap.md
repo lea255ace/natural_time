@@ -38,3 +38,11 @@ Known bugs and planned work, in priority order. When an item is finished, remove
     solar hour angle.
 
 -   Memoize the 365-sample curve in the `EqTime` complication by year.
+
+-   Make `rotationAngleDeg` optional in `RotatingImage` so `ClockFrame` and `StageTimer` can reuse it instead of
+    repeating its `Image` props (see the `TODO` in `SolarClock`).
+
+-   Move client state out of the pages and into smaller client components: the ticking clock in
+    `app/dashboard/page.tsx` and the slider state in `app/solar_clock/page.tsx` (see the `TODO`s there). Starting
+    the dashboard clock after mount would also fix the `/dashboard` hydration bug. The `TODO` in `app/layout.tsx`
+    about moving `metadata` can then be removed, since a site-wide `metadata` export belongs in the root layout.
