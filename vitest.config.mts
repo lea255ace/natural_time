@@ -10,9 +10,10 @@ export default defineConfig({
     },
     test: {
         include: ['app/**/*.test.ts'],
-        // Date math depends on the local timezone, so pin it to one with US DST rules.
+        // The code should use the configured location's time zone, never the machine's. Pin the machine to one that
+        // none of the tests use, so any accidental use of it fails.
         env: {
-            TZ: 'America/New_York',
+            TZ: 'Asia/Tokyo',
         },
     },
 });

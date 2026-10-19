@@ -13,6 +13,8 @@ import {
 } from '@chakra-ui/react';
 import Clock from 'components/clock';
 import { AstrolabeProvider } from 'context/astrolabeProvider';
+import { useConfigContext } from 'context/configProvider';
+import { zonedDate, zonedParts } from 'types/timeZone';
 import { useState } from 'react';
 import * as Complications from 'components/complications';
 
@@ -48,10 +50,11 @@ export default function SolarClock() {
     const [currentDay, setCurrentDay] = useState(50);
     const [currentTimeMinutes, setCurrentTimeMinutes] = useState(720);
 
-    const date = new Date();
-    date.setMonth(0, 1);
-    date.setDate(date.getDate() + currentDay);
-    date.setHours(currentTimeMinutes / 60, currentTimeMinutes % 60);
+    // The sliders pick a civil day and time at the configured location, in the current year there.
+    const { timeZone } = useConfigContext();
+    const year = zonedParts(new Date(), timeZone).year;
+    const date = zonedDate(timeZone, year, 1, 1 + currentDay,
+        Math.floor(currentTimeMinutes / 60), currentTimeMinutes % 60);
 
     return (
         <AstrolabeProvider date={date}>

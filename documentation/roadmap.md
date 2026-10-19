@@ -4,12 +4,7 @@ Known bugs and planned work, in priority order. When an item is finished, remove
 
 ## Known bugs (by priority)
 
-1.  Location and timezone can disagree. Latitude and longitude come from config, but the timezone offset and DST
-    state come from the browser, and `Astrolabe` hardcodes US DST dates for the DST complication. The clock should
-    use the configured location's timezone, including its DST rules, for civil time, the civil time offset, and the
-    DST complication.
-
-1.  `/dashboard` has a hydration mismatch, because the static export prerenders it with the build-time `Date`.
+1. `/dashboard` has a hydration mismatch, because the static export prerenders it with the build-time `Date`.
 
 ## Needs design
 
@@ -21,15 +16,21 @@ Known bugs and planned work, in priority order. When an item is finished, remove
 
 -   Let users fill in their latitude and longitude from their current location when they ask for it, for example
     with a "Use my location" button that calls the browser's Geolocation API. Open questions include how to handle a
-    denied or unavailable location, how precise the saved coordinates should be, and whether the location's timezone
-    (see the location and timezone bug) should be looked up at the same time.
+    denied or unavailable location, how precise the saved coordinates should be, and how to confirm the detected
+    location and time zone with the user before saving them.
 
 ## Minor issues
 
 -   `astro_algo`'s solar declination is up to about 0.5° off near the equinoxes (worst in 2026: September 24), which
-    makes the day length at 40° N up to about 3.4 minutes off. `calculateFractionalYear` uses the local hour where
-    NOAA's formula expects the UTC hour, and it ignores the leap-year cycle (see the `TODO` there). The fix belongs in
-    `astro_algo`; afterward, change the `it.fails` daylight test in `app/types/astrolabe.test.ts` back to `it`.
+    makes the day length at 40° N up to about 3 minutes off, because `calculateFractionalYear` ignores the leap-year
+    cycle (see the `TODO` there). It also reads and builds dates in local time where its formulas expect UTC;
+    `Astrolabe` compensates for that with `utcAsLocal` and `localFieldsAsUtc`, which can be removed once
+    `astro_algo` uses UTC. The fix belongs in `astro_algo`; afterward, change the `it.fails` daylight test in
+    `app/types/astrolabe.test.ts` back to `it`.
+
+-   The time zone lookup (`@photostructure/tz-lookup`) is approximate near time zone borders; its README estimates
+    that about 10% of inhabited locations get a different zone than the more accurate `geo-tz`. Letting users
+    override the detected zone would fix those cases.
 
 -   The stage dial in `Clock` assumes 60-minute stages, so stages longer than an hour produce negative angles.
 

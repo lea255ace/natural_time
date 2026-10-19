@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useMemo, useSyncExternalStore } from 'react';
+import { timeZoneForLocation } from 'types/timeZone';
 
 export type ConfigParameters = {
     latitude: number;
@@ -9,6 +10,8 @@ export type ConfigParameters = {
 
 type ConfigContextType = {
     configValues: ConfigParameters;
+    // The IANA time zone at the configured location.
+    timeZone: string;
     updateConfig: (newValues: ConfigParameters) => void;
 }
 
@@ -88,9 +91,10 @@ const ConfigContext = createContext<ConfigContextType>({} as ConfigContextType);
 export function ConfigProvider({ children }) {
     const configString = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const configValues = useMemo(() => parseConfig(configString), [configString]);
+    const timeZone = useMemo(() => timeZoneForLocation(configValues.latitude, configValues.longitude), [configValues]);
 
     return (
-        <ConfigContext.Provider value={{ configValues, updateConfig }}>{children}</ConfigContext.Provider>
+        <ConfigContext.Provider value={{ configValues, timeZone, updateConfig }}>{children}</ConfigContext.Provider>
     );
 }
 

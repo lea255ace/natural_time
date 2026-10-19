@@ -24,7 +24,7 @@ function parseCoordinate(value: string) {
 }
 
 export default function Config() {
-    const {configValues, updateConfig} = useConfigContext();
+    const {configValues, timeZone, updateConfig} = useConfigContext();
     // Holds the user's edits until they're submitted; otherwise the form shows the saved values.
     const [draftValues, setDraftValues] = useState<DisplayedParameters | null>(null);
     const [errors, setErrors] = useState<ParameterErrors>({});
@@ -79,6 +79,7 @@ export default function Config() {
             <br/>
             <Text>Current Latitude: {Math.abs(configValues.latitude) + ' ' + ((configValues.latitude > 0) ? 'N' : 'S')}</Text>
             <Text>Current Longitude: {Math.abs(configValues.longitude) + ' ' + ((configValues.longitude > 0) ? 'E' : 'W')}</Text>
+            <Text>Time Zone: {timeZone.replaceAll('_', ' ')}</Text>
         </Box>
     );
 }

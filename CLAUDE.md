@@ -47,6 +47,11 @@ work, and remove an item in the same commit that finishes it.
 -   The dev server only allows `localhost` origins by default. `allowedDevOrigins` includes `127.0.0.1`;
     without it the page silently fails to hydrate.
 
+-   Civil time comes from the configured location's time zone, never the browser's. Use the helpers in
+    `app/types/timeZone.ts` (or `Astrolabe`) instead of `Date`'s local-time methods such as `getHours` or
+    `new Date(year, month, day)`. `astro_algo` uses local time internally, so `Astrolabe` converts dates at that
+    boundary; call `astro_algo` through `Astrolabe`.
+
 -   Chakra is v3. The theme in `app/context/chakraProvider.tsx` restores Chakra v2's gray, blue, purple, and
     yellow scales and several v2 component defaults, so the site looks as it did on v2. Custom recipe variants
     aren't typed without Chakra's typegen; use a style object instead.

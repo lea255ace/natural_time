@@ -1,77 +1,99 @@
 import astro_algo from '@lea255ace/astro_algo';
+import {
+    daylightSavingsPeriod,
+    offsetMinutes,
+    zonedDate,
+    zonedDayOfYear,
+    zonedParts,
+} from 'types/timeZone';
+
+// astro_algo reads the hour and day with Date's local-time methods, but its NOAA formulas expect UTC. This shifts the
+// date so that its local time reads as UTC, which also keeps the results the same in every browser time zone.
+function utcAsLocal(date: Date) {
+    return new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+}
+
+// The inverse for dates astro_algo returns: it builds them from UTC fields with the local-time Date constructor.
+function localFieldsAsUtc(date: Date) {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
+        date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+}
 
 export default class Astrolabe {
     date: Date;
+    timeZone: string;
     #latitude: number;
     #longitude: number;
 
-    constructor({ date, latitude, longitude }: { date: Date, latitude: number, longitude: number }) {
+    constructor({ date, latitude, longitude, timeZone }:
+        { date: Date, latitude: number, longitude: number, timeZone: string }) {
         this.date = date;
+        this.timeZone = timeZone;
         this.#latitude = latitude;
         this.#longitude = longitude;
     }
 
+    // The civil year in the location's time zone.
+    year(date = this.date) {
+        return zonedParts(date, this.timeZone).year;
+    }
+
     dayOfYear(date = this.date) {
-        const startDate = new Date(date.getFullYear(), 0, 1);
-        const dateDiff = (date.getTime() - startDate.getTime()) + ((startDate.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
-        const dayLength = 1000 * 60 * 60 * 24;
-        return Math.floor(dateDiff / dayLength);
+        return zonedDayOfYear(date, this.timeZone);
     }
 
-    #probeForDay({startDate, day, count}: {startDate: Date, day: number, count: number}) {
-        const checkDate = new Date(startDate);
-        let dayCount = (checkDate.getDay() == day) ? 1 : 0;
-        while (dayCount < count) {
-            checkDate.setDate(checkDate.getDate() + 1);
-            if (checkDate.getDay() == day) {
-                ++dayCount;
-            }
-        }
-        return checkDate;
+    // The instant at the given civil day of the year (starting at 0) and minutes after midnight in this.date's year.
+    dateAt(dayOfYear: number, civilTimeMinutes = 0) {
+        return zonedDate(this.timeZone, this.year(), 1, 1 + dayOfYear,
+            Math.floor(civilTimeMinutes / 60), civilTimeMinutes % 60);
     }
 
-    // US DST Start: Second Sunday in March
+    // Null when the time zone doesn't observe DST.
     daylightSavingsStartDate(date = this.date) {
-        const startDate = this.#probeForDay({startDate: new Date(date.getFullYear(), 2, 1), day: 0, count: 2});
-        startDate.setHours(2, 0, 0, 0);
-        return startDate;
+        return daylightSavingsPeriod(this.timeZone, this.year(date))?.start ?? null;
     }
 
-    // US DST End: First Sunday in November
+    // Null when the time zone doesn't observe DST.
     daylightSavingsEndDate(date = this.date) {
-        const endDate = this.#probeForDay({startDate: new Date(date.getFullYear(), 10, 1), day: 0, count: 1});
-        endDate.setHours(2, 0, 0, 0);
-        return endDate;
+        return daylightSavingsPeriod(this.timeZone, this.year(date))?.end ?? null;
     }
 
     isDaylightSavings(date = this.date) {
-        const winterDateOffset = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
-        const summerDateOffset = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
-        return date.getTimezoneOffset() !== Math.max(winterDateOffset, summerDateOffset);
+        const year = this.year(date);
+        const standardOffset = Math.min(
+            offsetMinutes(new Date(Date.UTC(year, 0, 1, 12)), this.timeZone),
+            offsetMinutes(new Date(Date.UTC(year, 6, 1, 12)), this.timeZone));
+        return offsetMinutes(date, this.timeZone) > standardOffset;
     }
 
     eqTime(date = this.date) {
-        return astro_algo.calculateEqTimeMinutes(date);
+        return astro_algo.calculateEqTimeMinutes(utcAsLocal(date));
     }
 
     civilTimeMinutes(date = this.date) {
-        return date.getHours() * 60 + date.getMinutes();
+        const { hour, minute } = zonedParts(date, this.timeZone);
+        return hour * 60 + minute;
     }
 
+    // Minutes to add to civil time to get true solar time.
     civilTimeOffsetMinutes(date = this.date) {
-        const eqTime = astro_algo.calculateEqTimeMinutes(date);
-        //NB: Date.getTimezoneOffset returns an offset in minutes, with the opposite sign as the timezone.
-        return eqTime + 4 * this.#longitude + date.getTimezoneOffset();
+        const eqTime = this.eqTime(date);
+        return eqTime + 4 * this.#longitude - offsetMinutes(date, this.timeZone);
     }
 
     daylightMinutes(date = this.date): number {
-        const declination = astro_algo.calculateDeclinationRadians(date);
+        const declination = astro_algo.calculateDeclinationRadians(utcAsLocal(date));
         const sunriseHourAngleDegrees = astro_algo.calculateSunriseHourAngleDegrees(this.#latitude, declination);
         return 8 * sunriseHourAngleDegrees;
     }
 
+    // The June solstice in this.date's civil year.
+    summerSolsticeDate(date = this.date) {
+        return localFieldsAsUtc(
+            astro_algo.calculateQuarterDayForYear(astro_algo.QuarterDays.SummerSolstice, this.year(date)));
+    }
+
     solsticeDaylightMinutes(date = this.date): number {
-        const summerSolsticeDate = astro_algo.calculateQuarterDayForYear(astro_algo.QuarterDays.SummerSolstice, date.getFullYear());
-        return this.daylightMinutes(summerSolsticeDate);
+        return this.daylightMinutes(this.summerSolsticeDate(date));
     }
 }

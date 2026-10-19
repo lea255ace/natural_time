@@ -25,9 +25,7 @@ export function Display() {
     const astrolabe = useAstrolabeContext();
     const eqTimeRange = Array.from({length: 365}, (x, i) => i);
     const eqTimeData = eqTimeRange.map((x, i) => {
-        const date = new Date(astrolabe.date.getFullYear(), 0, 1, 12, 0, 0, 0);
-        date.setDate(date.getDate() + i);
-        return astrolabe.eqTime(date);
+        return astrolabe.eqTime(astrolabe.dateAt(i, 12 * 60));
     });
 
     const currentDayOfYear = astrolabe.dayOfYear();
