@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useMemo, useSyncExternalStore } from 'react';
+import { DEFAULT_CITY } from 'types/cities';
 import { timeZoneForLocation } from 'types/timeZone';
 
 export type ConfigParameters = {
@@ -18,8 +19,8 @@ type ConfigContextType = {
 const STORAGE_KEY = 'configValues';
 
 const DEFAULT_CONFIG: ConfigParameters = {
-    latitude: 40,
-    longitude: -74
+    latitude: DEFAULT_CITY.latitude,
+    longitude: DEFAULT_CITY.longitude
 };
 
 export function isValidLatitude(latitude: number) {

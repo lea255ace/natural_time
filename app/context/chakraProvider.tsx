@@ -8,7 +8,7 @@ import {
     defineRecipe,
     defineSlotRecipe,
 } from '@chakra-ui/react';
-import { listAnatomy, sliderAnatomy } from '@chakra-ui/react/anatomy';
+import { listAnatomy, nativeSelectAnatomy, sliderAnatomy } from '@chakra-ui/react/anatomy';
 import React from 'react';
 
 const baseFonts = defaultConfig.theme?.tokens?.fonts;
@@ -101,6 +101,19 @@ const config = defineConfig({
                         marker: {
                             item: {
                                 _marker: { color: 'inherit' }
+                            }
+                        }
+                    }
+                }
+            }),
+            nativeSelect: defineSlotRecipe({
+                slots: nativeSelectAnatomy.keys(),
+                variants: {
+                    variant: {
+                        outline: {
+                            field: {
+                                bg: 'white',
+                                borderColor: 'gray.500'
                             }
                         }
                     }

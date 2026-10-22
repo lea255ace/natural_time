@@ -8,16 +8,11 @@ Known bugs and planned work, in priority order. When an item is finished, remove
 
 ## Needs design
 
--   Polar latitudes produce `NaN`, and the clock shows "undefined undefined". `calculateSunriseHourAngleDegrees` in
-    `astro_algo` doesn't clamp the `acos` argument, and `Moment` divides by the length of the day or night, which is
-    zero during polar day and night. Clamping alone isn't enough: the clock's phases and watches assume a sunrise and
-    a sunset every day, so this first needs a decision about what the clock should show when the day or night lasts
-    all 24 hours.
-
--   Let users fill in their latitude and longitude from their current location when they ask for it, for example
-    with a "Use my location" button that calls the browser's Geolocation API. Open questions include how to handle a
-    denied or unavailable location, how precise the saved coordinates should be, and how to confirm the detected
-    location and time zone with the user before saving them.
+- Polar latitudes produce `NaN`, and the clock shows "undefined undefined". `calculateSunriseHourAngleDegrees` in
+  `astro_algo` doesn't clamp the `acos` argument, and `Moment` divides by the length of the day or night, which is
+  zero during polar day and night. Clamping alone isn't enough: the clock's phases and watches assume a sunrise and
+  a sunset every day, so this first needs a decision about what the clock should show when the day or night lasts
+  all 24 hours.
 
 ## Minor issues
 
