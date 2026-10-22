@@ -17,8 +17,9 @@ npm run deploy
 ```
 
 The deploy script runs ESLint, cleans and rebuilds the static export, then syncs `out/` to the mount with `rsync`. It
-stops with an error if ESLint reports errors, if the mount is missing, if `rsync` fails to transfer any file, or if
-`index.html` on Neocities doesn't match the new build.
+then waits 60 seconds for the Neocities CDN to pick up the new files, and checks that the live home page matches
+`out/index.html`. It stops with an error if ESLint reports errors, if the mount is missing, if `rsync` fails to
+transfer any file, or if the live home page can't be fetched or doesn't match the new build.
 
 The script syncs to `~/neocities_webdav` by default. To use a different mount point, set `NEOCITIES_WEBDAV`:
 
@@ -26,5 +27,15 @@ The script syncs to `~/neocities_webdav` by default. To use a different mount po
 NEOCITIES_WEBDAV=/mnt/neocities npm run deploy
 ```
 
+The script checks the home page at `https://natural-time.bit-bar.org` by default. To check a different address, set
+`NEOCITIES_SITE_URL`:
+
+```sh
+NEOCITIES_SITE_URL=https://example.neocities.org npm run deploy
+```
+
 The script passes `--inplace` to `rsync`. Without it, `rsync` uploads each file under a temporary name and renames it
 over the original, and Neocities rejects that rename for `index.html`, leaving the old home page in place.
+
+The script checks the live site instead of reading `index.html` back through the mount, because davfs2 can keep
+returning a cached old copy of a file it has just uploaded.

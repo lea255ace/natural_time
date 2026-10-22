@@ -68,6 +68,9 @@ work, and remove an item in the same commit that finishes it.
 
 -   Neocities rejects rsync's temp-file rename for `index.html`; the deploy script uses `--inplace` for this.
 
+-   Reads through the davfs2 mount can return a stale cached copy of a file that was just uploaded, so check what
+    Neocities serves over HTTPS instead. Neocities redirects `/page.html` to `/page`, so follow redirects.
+
 -   There is intentionally no CI. Checks run locally with `npm run check`, and `npm run deploy` lints before it
     builds.
 
