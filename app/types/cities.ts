@@ -13,7 +13,7 @@ export const CITIES: readonly City[] = [
     { name: 'Los Angeles', latitude: 34.0522, longitude: -118.2437 },
 ];
 
-export const DEFAULT_CITY = CITIES[0];
+export const DEFAULT_CITY = CITIES.find(city => city.name === 'Los Angeles');
 
 // The preset city at exactly these coordinates, if there is one.
 export function cityAt(latitude: number, longitude: number): City | undefined {

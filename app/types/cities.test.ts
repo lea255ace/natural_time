@@ -12,8 +12,8 @@ describe('CITIES', () => {
         ]);
     });
 
-    it('defaults to New York', () => {
-        expect(DEFAULT_CITY.name).toBe('New York');
+    it('defaults to Los Angeles', () => {
+        expect(DEFAULT_CITY.name).toBe('Los Angeles');
     });
 });
 
