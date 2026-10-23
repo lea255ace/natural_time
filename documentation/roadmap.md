@@ -1,6 +1,7 @@
 # Roadmap
 
 Known bugs and planned work, in priority order. When an item is finished, remove it in the same commit.
+Unplanned ideas for someday are in [future ideas](future-ideas.md).
 
 ## Known bugs (by priority)
 
