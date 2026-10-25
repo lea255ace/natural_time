@@ -10,20 +10,23 @@ with the motion of the Sun, Moon, and stars, from which it was originally derive
 Prior to the advent of accurate timepieces, the time of day was determined according to the position of the Sun.
 Midday is defined as the point when the Sun reaches the highest point of its arc from East to West.{a1}
 From there, the 360&deg; of rotation is divided into twenty-four 15&deg; increments corresponding with
-the hours of the day; 11:00 am is the time at which the Sun is 15&deg; East of its position at midday.
+the hours of the day; 11:00 AM is the time at which the Sun is 15&deg; East of its position at midday.
 In this way, the time of day is determined by the position of the Sun, rather than the time of day existing unto itself
 and the motion of the Sun being projected onto that scale. Under a solar time system, it is redundant to ask 'Where will
-the Sun be at 11:00 am?'--or at any other time--becuase the time of 11:00 am is *defined by* the Sun reaching the
-position assigned to 11:00 am.
+the Sun be at 11:00 AM?'--or at any other time--because the time of 11:00 AM is *defined by* the Sun reaching the
+position assigned to 11:00 AM.
 
-export const a1 = <Annotation trigger='1' body="This is also the point where the Sun's observed position is due South."/>
+export const a1 = <Annotation trigger='1'
+                    body="This is also the point where the Sun's observed position in the Northern Hemisphere is
+                          due South."
+                    />
 
-## Atomic measurements
-Today, the second is an SI unit defined according to the observed oscillation frequency of a Cesium atom.{a2} From these
+## Atomic Measurements
+Today, the second is an SI unit defined according to the observed oscillation frequency of a cesium atom.{a2} From these
 observations we derive International Atomic Time (TAI), a coordinated time standard denoting the observed passage of
 time on Earth.{a3} Over time TAI drifts from observed solar time,{a4} so there is a different coordinated time standard
 which underpins modern life, Coordinated Universal Time (UTC). UTC is derived by taking TAI and offsetting it by an
-integer number of leap seconds to keep it from drifting too far from observed solar noon at 0&deg; latitude (the prime
+integer number of leap seconds to keep it from drifting too far from observed solar noon at 0&deg; longitude (the prime
 meridian).
 
 You would be forgiven for thinking that UTC, given the precision with which it is maintained, always provides an
@@ -45,13 +48,13 @@ export const a4 = <Annotation trigger='4'
 
 ## Historical Time Systems
 As the Earth moves around the Sun, the amount of daylight varies throughout the year due to the tilt of Earth's axis.
-The rate of change of daylight hours is non-uniform over the year,{a5} changing the most from day-to-day at the Spring
+The rate of change of daylight hours is non-uniform over the year,{a5} changing the most from day to day at the Spring
 and Fall equinoxes and the least at the Summer and Winter solstices.{a6}
 
 Civil time, which is the time system that we are familiar with, uses units of fixed length--an hour is the same amount
 of time in Summer as in Winter--but this was not universal among historical time systems. Often, the day and night
 would each be allocated a fixed number of hours, the length of which would vary depending on the amount of daylight at
-that time of year. In addition, a 'day' was generally figured from one midday to the next, rather than our current
+that time of year. In addition, a 'day' was often figured from one midday to the next, rather than our current
 system of midnight to midnight.
 
 You may notice that a trend is emerging of things being defined in terms of solar noon. Why might that be? Why is noon
@@ -59,7 +62,7 @@ more special than any of the other 23 hours of the day? And here we arrive at th
 time: **a day is not uniformly 24 hours long**. While we think of a day as 'one revolution of the Earth', the Earth is
 moving through its orbit at the same time it is rotating. So, when it has rotated a full 360&deg;, it has also advanced
 a bit and the observed Sun will be a bit East of where it was at the same 'time' yesterday; the Earth needs to rotate
-360&deg; *and then a bit more* in order for the Sun to return to its zenith and reach solar noon.
+360&deg; *and then a bit more* in order for the Sun to return to its peak and reach solar noon.
 
 In fact, the length of time from one observed solar noon to the next varies about 24 hours{a7} by as much as 30 seconds
 longer to 20 seconds shorter over the course of the year. You may be wondering, how on Earth{a8} did we sweep that
@@ -83,7 +86,7 @@ export const a8 = <Annotation trigger='8' body='Pun intended.'/>
 The deeper you dig into the celestial movements that actually create our experience of time, the messier things get.
 Our neat, tidy civil time system is a tablecloth thrown over the vagaries of the physical world, and the lynchpin of the
 illusion is the **Mean Sun**. Rather than attempt to model the irregular motion of the Sun,{a9} civil time models
-an abstraction which is smipler and more predictable. The Mean Sun is a virtual Sun taken to have the same orbital
+an abstraction which is simpler and more predictable. The Mean Sun is a virtual Sun taken to have the same orbital
 period as the apparent Sun,{a10} but with an orbital velocity equal to the yearly average velocity of the apparent
 Sun.{a11} Therefore, the daily Eastward motion of the Mean Sun does not vary, and the length of a mean solar day is a
 constant 24 hours all through the year.
@@ -105,9 +108,9 @@ describing this difference with respect to the day of the year.
 </Box>
 
 This may seem strange and convoluted--and it is!--but there is a good reason why our time system relies on an idealized
-abstraction of the Sun. To wit, accurately representing apparent solar time using eighteenth-century technology 
+abstraction of the Sun. To wit, accurately representing apparent solar time using eighteenth-century technology
 required additional components and increased manufacturing complexity.{a12} The relative simplicity of modeling mean
-solar time gave it an edge as precision clock and watches became widely adopted, leading to the ubiquity of our
+solar time gave it an edge as precision clocks and watches became widely adopted, leading to the ubiquity of our
 current system.
 
 export const a9 = <Annotation trigger='9'
@@ -139,7 +142,7 @@ and apparent solar noon can be as late as **1:30 PM**. We've been using exclusiv
 to read clocks, and yet we are so attuned to the motion of the Sun that we get mixed up when civil time disagrees with
 apparent solar time.
 
-We are wired to connect with the motion of the Sun, Moon, and stars, as we have been doing for millenia, but our modern
+We are wired to connect with the motion of the Sun, Moon, and stars, as we have been doing for millennia, but our modern
 time system severs this connection. We are used to thinking in civil time, and imposing it on celestial motion. But
 celestial motion *is* time. The Mean Sun approximation is a relic of the technological path we took to get here, but
 we have surpassed that model and can define elapsed time precisely using only atomic observation.

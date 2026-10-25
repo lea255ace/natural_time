@@ -36,8 +36,6 @@ Unplanned ideas for someday are in [future ideas](future-ideas.md).
 
 -   The solstice lines in `SolarClock` are drawn symmetrically, which is wrong (see the `TODO` there).
 
--   `about.mdx` has the typo "becuase" and says "0° latitude (the prime meridian)" where it means longitude.
-
 ## Maintenance
 
 -   Turn on `strict` in `tsconfig.json` and type the remaining untyped props and events.
